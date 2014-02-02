@@ -8,14 +8,19 @@
 
 $fa=0.1;
 
-BASE=35;
+BASE=55;
 TOP=BASE*1.2;
 AVGDIAM=(BASE+TOP)/2;
 VOLUME=180000;
 PI=3.14159;
-HEIGHT=VOLUME/(AVGDIAM*AVGDIAM*PI);
+HEIGHT=VOLUME/((AVGDIAM/2)*(AVGDIAM/2)*PI);
 
 WALLS=2;
+
+echo( "Interior base diameter:", BASE );
+echo( "Interior top diameter: ", TOP );
+echo( "Interior average diameter: ", AVGDIAM );
+echo( "Interior height: ", HEIGHT );
 
 difference() {
 	// rice cup exterior
@@ -23,7 +28,7 @@ difference() {
 		cube( size=[HEIGHT+(WALLS*3),HEIGHT+(WALLS*3),HEIGHT+WALLS], center=true );
 	}
 	// rice cup interior
-	translate( v=[0,0,WALLS] ) {
+	translate( v=[0,0,WALLS+0.01] ) {
 		cylinder(r1=(BASE/2),r2=(TOP/2),h=HEIGHT);
 	}
 }
